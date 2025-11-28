@@ -111,5 +111,41 @@ else{
   console.log("Invalid Number");
 }
 
+ Question 7 - Perform addition, subtraction, multiplication, or division based on user input (e.g., using if-else or switch).
+
+
+let num1 = prompt("Enter First Number");
+let num2 = prompt("Enter second Number");
+let op = prompt("Enter operator (+,-,*,/)");
+
+num1 = Number(num1);
+num2 = Number(num2);
+
+let result;
+
+switch (op) {
+  case "+":
+    result = num1 + num2;
+    break;
+
+  case "-":
+    result = num1 - num2;
+    break;
+  case "*":
+    result = num1 * num2;
+    break;
+  case "/":
+    if (nub2 === 0) {
+      result = "Error : can't divide by zero";
+    } else {
+      result = num1 / num2;
+    }
+    break;
+  default:
+    result = "Invalid operation";
+    break;
+}
+
+console.log("result :", result);
 
 */
