@@ -48,3 +48,29 @@ if (Year % 4 === 0) {
 } else {
   console.log("Not a Leap Year");
 }
+/* Question 4 - Find the largest of three numbers using nested if statements. */
+
+let a = prompt("Enter First Number");
+let b = prompt("Enter second Number");
+let c = prompt("Enter last Number");
+
+a = Number(a);
+b = Number(b);
+c = Number(c);
+
+if(a>b){
+  if(a>=c){
+    console.log("first Number is largest");
+  }
+  else{
+    console.log("Last number is largest");
+  }
+}
+else{
+  if(b>=c){
+    console.log("second number is largest");
+  }
+  else{
+    console.log("third number is largest")
+  }
+}
