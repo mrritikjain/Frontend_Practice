@@ -1,52 +1,82 @@
 # Focus Analytics 🧠
 
-A productivity application that helps users track focus sessions and gain insights into their work habits. Built with **React** and **pure JavaScript logic** (no external state libraries).
+A minimalist, high-performance productivity tracker built with React. Track your focus sessions, analyze habits, and gain insights—all without leaving your browser.
 
-## 🚀 Features
+## ✨ Features
 
-- **Activity Tracking**: Categorize sessions (Study, Coding, Reading, Break).
-- **Distraction-Free Timer**: Minimalist interface for active sessions.
+- **Activity Tracking**: Track different types of work (Study, Coding, Reading, Break).
+- **Distraction-Free Timer**: A clean UI when the session is running to help you stay focused.
+- **Persistent History**: Your data is saved automatically to `localStorage`, ensuring you never lose your progress even after a refresh.
 - **Smart Dashboard**:
-  - **Live Stats**: Total sessions, average duration, and personal bests.
-  - **Auto-Insights**: Algorithmic feedback based on your history (e.g., _"You focus best in the Morning"_).
-- **Persistence**: Sessions are saved to `localStorage`, so data survives page refreshes.
+  - **Insights**: Automated feedback on your peak productivity times (Morning/Afternoon/Evening) and a "Focus Score" (Excellent/Good/Needs Improvement).
+  - **Statistics**: Real-time metrics showing Total Sessions, Average Duration, and your Longest Session.
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: React (Hooks: `useState`, `useEffect`, Custom Hooks)
-- **Build Tool**: Vite
-- **Styling**: Vanilla CSS (Variables, Flexbox/Grid, Dark Mode)
-- **State Management**: React Component State & LocalStorage
+- **Core**: React 19 (Hooks: `useState`, `useEffect`, Custom Hooks)
+- **Tooling**: Vite (Fast HMR & Build)
+- **Styling**: Vanilla CSS (CSS Variables, Flex/Grid Layouts, Responsive Design)
+- **State**: React Component State + `localStorage` for persistence
 
-## 🏗️ Implementation Details
+## 🚀 Getting Started
 
-### Custom Hook: `useFocusTimer`
+### Prerequisites
 
-The core logic is encapsulated in a custom hook that manages:
+- Node.js installed (v16+ recommended).
 
-- The `setInterval` timer loop.
-- Activity state transitions (Idle -> Running -> Saved).
-- derived state calculations for the dashboard.
+### Installation
 
-```javascript
-// Example usage
-const { isRunning, startSession, history } = useFocusTimer();
+1. Navigate to the project directory:
+
+   ```bash
+   cd focus_analytics
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
+
+To start the development server:
+
+```bash
+npm run dev
 ```
 
-## 📦 How to Run
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-1.  Clone the repository.
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-3.  Run the development server:
-    ```bash
-    npm run dev
-    ```
+## 📂 Project Structure
 
-## 🔮 Future Improvements
+```
+focus_analytics/
+├── src/
+│   ├── components/
+│   │   ├── ActiveSession.jsx   # Timer view when session is running
+│   │   ├── Dashboard.jsx       # Stats, history, insights, and chart logic
+│   │   └── SessionInput.jsx    # Form to start new sessions
+│   ├── hooks/
+│   │   └── useFocusTimer.js    # Core logic (timer management, local storage sync)
+│   ├── App.jsx                 # Main layout and view router
+│   └── main.jsx                # Application entry point
+├── public/                     # Static assets
+└── package.json                # Project dependencies and scripts
+```
 
-- [ ] **Data Visualization**: Add charts for weekly trends using `recharts`.
-- [ ] **TypeScript Migration**: For better type safety and scalability.
-- [ ] **Export Data**: Ability to download session history as CSV.
+## 🧠 How It Works
+
+1. **Start a Session**: Select an activity type (e.g., "Coding") from the dropdown and hit **Start Session**.
+2. **Focus**: The interface switches to a dedicated timer view.
+3. **Analyze**: When you click **Stop**, the session is logged to your history. The Dashboard updates immediately to reflect your new stats and recalculates your Focus Score based on your performance.
+
+## 🔮 Future Roadmap
+
+- [ ] Data Visualization Charts
+- [ ] Goals & Daily Targets
+- [ ] Dark/Light Mode Toggle
+- [ ] Export Data to CSV
+
+---
+
+Built with specific focus on performance and simplicity.
