@@ -1,133 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Real-Time Search Engine</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      padding-top: 50px;
-    }
-
-    .search-box {
-      width: 400px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      outline: none;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 10px;
-      background: #1e293b;
-      border-radius: 6px;
-    }
-
-    li {
-      padding: 10px;
-      border-bottom: 1px solid #334155;
-    }
-
-    li:last-child {
-      border-bottom: none;
-    }
-
-    li:hover {
-      background: #334155;
-      cursor: pointer;
-    }
-
-    .loading {
-      margin-top: 10px;
-      color: #38bdf8;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search GitHub users..." />
-    <div class="loading" id="loading"></div>
-    <ul id="results"></ul>
-  </div>
-
-  <script>
-    const input = document.getElementById("searchInput");
-    const results = document.getElementById("results");
-    const loading = document.getElementById("loading");
-
-    /* ===============================
-       DEBOUNCE (Closure + Currying)
-    ================================*/
-    function debounce(delay) {
-      let timer;
-      return function (callback) {
-        clearTimeout(timer);
-        timer = setTimeout(callback, delay);
-      };
-    }
-
-    const debouncedSearch = debounce(500);
-
-    /* ===============================
-       FETCH DATA (async / await)
-    ================================*/
-    async function fetchUsers(query) {
-      if (!query) {
-        results.innerHTML = "";
-        return;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        height: 100vh;
+        width: 100vw;
       }
-
-      try {
-        loading.innerText = "Loading...";
-        const res = await fetch(
-          `https://api.github.com/search/users?q=${query}`
-        );
-        const data = await res.json();
-        renderResults(data.items || []);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        loading.innerText = "";
+      section {
+        margin: 10vh 10vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
       }
-    }
+      section div {
+        height: 400px;
+        width: 200px;
+        background-color: #aaaaaa;
+        border-radius: 20px;
+      }
+      section div:nth-child(2) {
+        display: flex;
+        flex-direction: column;
+      }
+      section div:nth-child(2) div:nth-child(1) {
+       background-color: red;
+       display: flex;
+       justify-content: space-between;
+      }
+      section div:nth-child(2) div span{
+        background-color: #9C8F8F;
+        height: 60px;
+        width: 60px;
+        border-radius: 10px 0px;
 
-    /* ===============================
-       RENDER RESULTS (HOF)
-    ================================*/
-    function renderResults(users) {
-      results.innerHTML = "";
 
-      users
-        .slice(0, 5) // limit results
-        .map((user) => {
-          const li = document.createElement("li");
-          li.innerText = user.login;
-          results.appendChild(li);
-        });
-    }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div></div>
+      <div>
+        <div>
+          <span></span>
+          <span></span>
+        </div>
+        <div><span></span></div>
+        <div><span></span> <span></span></div>
+      </div>
+      <div></div>
+    </section>
 
-    /* ===============================
-       EVENT LISTENER (Callback)
-    ================================*/
-    input.addEventListener("input", (e) => {
-      const value = e.target.value;
-
-      debouncedSearch(() => {
-        fetchUsers(value);
-      });
-    });
-  </script>
-</body>
+    <script src="/index.js"></script>
+  </body>
 </html>
