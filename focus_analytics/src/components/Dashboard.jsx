@@ -6,14 +6,14 @@ const Dashboard = ({ history, deleteSession, formatTime }) => {
 
   const totalTimeSeconds = history.reduce(
     (acc, curr) => acc + curr.duration,
-    0
+    0,
   );
   const averageTime =
     totalSessions > 0 ? Math.floor(totalTimeSeconds / totalSessions) : 0;
 
   const longestSession = history.reduce(
     (max, curr) => (curr.duration > max.duration ? curr : max),
-    { duration: 0 }
+    { duration: 0 },
   );
 
   // Simple Insight Logic
@@ -26,14 +26,7 @@ const Dashboard = ({ history, deleteSession, formatTime }) => {
   const getInsight = () => {
     if (totalSessions === 0) return "Start your first session to get insights!";
 
-    // Day detection (simple check of last session)
-    const lastSessionHour = new Date(history[0]?.date).getHours();
-    let timeOfDay = "Day";
-    if (lastSessionHour < 12) timeOfDay = "Morning";
-    else if (lastSessionHour < 18) timeOfDay = "Afternoon";
-    else timeOfDay = "Evening";
-
-    return `You seem to be active in the ${timeOfDay}. Your focus score is ${getFocusScore()}.`;
+    return `Your focus score is ${getFocusScore()}.`;
   };
 
   return (

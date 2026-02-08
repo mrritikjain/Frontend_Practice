@@ -1,63 +1,773 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Influence - Short-form content</title>
+    <!-- Performance: Preconnect to font domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Use Inter font for better design match -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-      body {
+      :root {
+        --text-main: #111;
+        --text-light: #666;
+        --bg: #fff;
+        --accent-orange: #ff9500;
+        --accent-orange-bg: #fffbf5;
+        --accent-orange-border: #ffdcb5;
+      }
+
+      * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-        height: 100vh;
-        width: 100vw;
       }
-      section {
-        margin: 10vh 10vw;
+
+      body {
+        background-color: var(--bg);
+        color: var(--text-main);
+        overflow-x: hidden;
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        -webkit-font-smoothing: antialiased; /* Crisp fonts */
+      }
+
+      /* ===== HERO SECTION ===== */
+      .hero {
+        max-width: 1280px;
+        min-height: 90vh; /* Requested 96vh */
+        margin: 0 auto;
+        margin-top: -60px;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center; /* Vertically center */
+      }
+
+      /* Left Content */
+      .hero-content {
+        padding-right: 20px;
+        max-width: 600px;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        background: var(--accent-orange-bg);
+        border: 1px solid var(--accent-orange-border);
+        color: #e67e22;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        background: #e67e22;
+        border-radius: 50%;
+      }
+
+      h1 {
+        font-size: clamp(48px, 4vw, 76px); /* Responsive Typography */
+        line-height: 1.05;
+        font-weight: 600;
+        letter-spacing: -2.5px; /* Tighter tracking like design */
+        margin-bottom: 24px;
+        color: #000;
+      }
+
+      h1 span.italic {
+        font-style: italic;
+        font-family:
+          "Playfair Display", serif; /* Optional serif if loaded, else fallback */
+        font-weight: 500;
+      }
+
+      .icon-cluster {
+        display: inline-flex;
+        vertical-align: middle;
+        margin: 0 12px;
+        position: relative;
+        height: 60px;
+        width: 130px;
+      }
+
+      .social-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        position: absolute;
+        border: 4px solid #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      }
+
+      .si-snap {
+        background: #fffc00;
+        left: 0;
+        z-index: 1;
+      }
+      .si-tiktok {
+        background: #000;
+        left: 35px;
+        z-index: 2;
+      }
+      .si-insta {
+        background: linear-gradient(
+          45deg,
+          #f09433,
+          #e6683c,
+          #dc2743,
+          #cc2366,
+          #bc1888
+        );
+        left: 70px;
+        z-index: 3;
+      }
+      .si-youtube {
+        background: #ff0000;
+        left: 105px;
+        z-index: 4;
+      }
+
+      .si-snap svg {
+        width: 28px;
+        fill: black;
+      }
+      .si-tiktok svg {
+        width: 28px;
+        fill: white;
+      }
+      .si-insta svg {
+        width: 28px;
+        fill: white;
+      }
+      .si-youtube svg {
+        width: 24px;
+        fill: white;
+      }
+
+      p.subtitle {
+        font-size: 20px;
+        color: var(--text-light);
+        line-height: 1.5;
+        margin-bottom: 40px;
+        max-width: 500px;
+        letter-spacing: -0.3px;
+        font-weight: 400;
+      }
+
+      .cta-group {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+
+      .btn-primary {
+        background: #111;
+        color: #fff;
+        padding: 16px 32px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s;
+      }
+
+      .btn-primary:active {
+        transform: scale(0.98);
+      }
+
+      .btn-secondary {
+        background: #fff;
+        color: #111;
+        padding: 16px 32px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 16px;
+        border: 1px solid #e5e5e5;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .btn-secondary:hover {
+        background: #f9f9f9;
+      }
+
+      .social-proof {
+        display: flex;
+        gap: 40px;
+        border-top: 1px solid #f0f0f0;
+        padding-top: 30px;
+      }
+
+      .sp-item h4 {
+        font-size: 10px;
+        color: #999;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+        font-weight: 700;
+      }
+
+      .avatar-group {
+        display: flex;
+      }
+      .avatar-group img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        margin-left: -12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+      .avatar-group img:first-child {
+        margin-left: 0;
+      }
+
+      .stars {
+        color: #f59e0b;
+        font-size: 20px;
+        letter-spacing: 2px;
+      }
+
+      /* Right Visual */
+      .hero-visual {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+      }
+
+      .phone-mockup {
+        width: 290px;
+        height: 580px;
+        background: #000;
+        border-radius: 48px;
+        position: relative;
+        box-shadow: 0 50px 120px -20px rgba(0, 0, 0, 0.25);
+        border: 12px solid #222; /* Sleek dark bezel */
+        overflow: hidden;
+      }
+
+      .phone-mockup iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        pointer-events: none; /* Prevent interaction with video controls */
+        transform: scale(
+          1.4
+        ); /* Slight zoom to fill properly if aspect ratio mismatches */
+      }
+
+      /* Floating Badges */
+      .float-badge {
+        position: absolute;
+        background: #fff;
+        border-radius: 16px;
+        padding: 10px 18px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        z-index: 10;
+        animation: floatAnim 6s ease-in-out infinite;
+        white-space: nowrap;
+      }
+
+      .fb-chat {
+        top: 120px;
+        left: 0px;
+        border-top-left-radius: 4px;
+        animation-delay: 0s;
+      }
+      .fb-views {
+        top: 25%;
+        right: 0px;
+        animation-delay: 1s;
+      }
+      .fb-likes {
+        bottom: 35%;
+        left: 0px;
+        animation-delay: 2s;
+      }
+      .fb-followers {
+        bottom: 120px;
+        right: 0px;
+        padding: 8px 14px;
+        animation-delay: 1.5s;
+      }
+
+      @keyframes floatAnim {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-12px);
+        }
+      }
+
+      /* Responsive logic */
+      @media (max-width: 1000px) {
+        .hero {
+          grid-template-columns: 1fr;
+          text-align: center;
+          height: auto;
+          min-height: auto;
+          padding-top: 60px;
+          padding-bottom: 60px;
+        }
+
+        .hero-content {
+          margin: 0 auto;
+          padding-right: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .cta-group {
+          justify-content: center;
+        }
+        .social-proof {
+          justify-content: center;
+          width: 100%;
+        }
+        h1 {
+          font-size: 42px;
+        }
+        .phone-mockup {
+          width: 300px;
+          height: 600px;
+        }
+
+        .hero-visual {
+          margin-top: 60px;
+        }
+        .float-badge {
+          transform: scale(0.9);
+        }
+        .fb-views {
+          right: -20px;
+        }
+        .fb-likes {
+          left: -20px;
+        }
+        .fb-followers {
+          right: -10px;
+        }
+      }
+      /* ===== CAROUSEL SECTION ===== */
+      .carousel-section {
+        padding: 100px 0;
+        background-color: #fff;
+        overflow: hidden;
+      }
+
+      .carousel-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.7s ease-in-out;
+        padding-top: 20px;
+        padding-bottom: 40px; /* Space for shadow */
+      }
+
+      .card {
+        min-width: 350px;
+        max-width: 440px;
+        height: 340px;
+        background: #eeeeee;
+        border: 1px solid #b2b2b2;
+        border-radius: 24px;
+        padding: 32px;
+        color: #111;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 12px;
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+      }
+
+      .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        color: #fff; /* White text for contrast on colored bg */
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 24px;
       }
-      section div {
-        height: 400px;
-        width: 200px;
-        background-color: #aaaaaa;
-        border-radius: 20px;
+
+      /* Alternate avatar colors - adapted for light theme harmony */
+      .card:nth-child(odd) .avatar {
+        background-color: #000;
+        color: #fff;
       }
-      section div:nth-child(2) {
+
+      .card:nth-child(even) .avatar {
+        background-color: #ff9500;
+        color: #fff;
+      }
+
+      .name {
+        font-size: 13px;
+        color: #999;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+      }
+
+      .title {
+        font-size: 18px;
+        color: #111;
+        margin-bottom: 12px;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .text {
+        font-size: 15px;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .dots {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 8px;
       }
-      section div:nth-child(2) div:nth-child(1) {
-       background-color: red;
-       display: flex;
-       justify-content: space-between;
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        background: #eee;
+        border-radius: 50%;
+        transition: 0.3s ease;
       }
-      section div:nth-child(2) div span{
-        background-color: #9C8F8F;
-        height: 60px;
-        width: 60px;
-        border-radius: 10px 0px;
 
+      .dot.active {
+        width: 24px;
+        height: 8px;
+        background: #111;
+        border-radius: 10px;
+      }
 
+      /* Mobile fix */
+      @media (max-width: 767px) {
+        .card {
+          min-width: 85vw;
+          margin: 0 10px;
+          height: auto;
+          min-height: 320px;
+        }
       }
     </style>
   </head>
   <body>
-    <section>
-      <div></div>
-      <div>
-        <div>
-          <span></span>
-          <span></span>
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-content">
+        <div class="status-badge">
+          <div class="status-dot"></div>
+          3 SPOTS LEFT FOR AUGUST
         </div>
-        <div><span></span></div>
-        <div><span></span> <span></span></div>
-      </div>
-      <div></div>
-    </section>
 
-    <script src="/index.js"></script>
+        <h1>
+          Short-form content <br />
+          <span style="display: inline-flex; align-items: center">
+            <div class="icon-cluster">
+              <div class="social-icon si-snap">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+                  />
+                </svg>
+              </div>
+              <div class="social-icon si-tiktok">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12.5 3v13.5c0 1.9-1.6 3.5-3.5 3.5s-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5c.5 0 1 .1 1.4.3V6.7c-.5-.1-1-.2-1.4-.2-3.9 0-7 3.1-7 7s3.1 7 7 7 7-3.1 7-7V6h-3.5z"
+                  />
+                </svg>
+              </div>
+              <div class="social-icon si-insta">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m.2 2A3.6 3.6 0 0 0 4.4 7.6v8.8C4.4 18.4 6 20 8 20h8c2 0 3.6-1.6 3.6-3.6V7.6C19.6 5.6 18 4 16 4H8m8 5a5 5 0 1 1-5 5 5 5 0 0 1 5-5m0 2a3 3 0 1 0 3 3 3 3 0 0 0-3-3m5.3-3.2a1.3 1.3 0 1 1-1.3 1.3 1.3 1.3 0 0 1 1.3-1.3z"
+                  />
+                </svg>
+              </div>
+              <div class="social-icon si-youtube">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </span>
+          that builds<br />
+          <span class="italic">real influence.</span>
+        </h1>
+
+        <p class="subtitle">
+          We turn your expertise into viral short-form content that builds trust
+          and drives attention.
+        </p>
+
+        <div class="cta-group">
+          <button class="btn-primary">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              />
+            </svg>
+            Let's grow your brand
+          </button>
+          <button class="btn-secondary">See pricing</button>
+        </div>
+
+        <div class="social-proof">
+          <div class="sp-item">
+            <h4>100+ PERSONAL BRANDS</h4>
+            <div class="avatar-group">
+              <img src="https://i.pravatar.cc/100?img=11" alt="" />
+              <img src="https://i.pravatar.cc/100?img=12" alt="" />
+              <img src="https://i.pravatar.cc/100?img=13" alt="" />
+              <img src="https://i.pravatar.cc/100?img=14" alt="" />
+            </div>
+          </div>
+          <div class="sp-item">
+            <h4>RATED EXCELLENT: 5/5</h4>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual / Phone -->
+      <div class="hero-visual">
+        <div class="phone-mockup">
+          <!-- Vimeo Embed with optimized loading -->
+          <iframe
+            src="https://player.vimeo.com/video/336214300?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Short Form Content Demo"
+          >
+          </iframe>
+        </div>
+
+        <div class="float-badge fb-chat">
+          <svg width="18" height="18" fill="#111" viewBox="0 0 24 24">
+            <path
+              d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
+            />
+          </svg>
+          100+
+        </div>
+
+        <div class="float-badge fb-views">
+          <svg width="18" height="18" fill="#111" viewBox="0 0 24 24">
+            <path
+              d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+            />
+          </svg>
+          40k+
+        </div>
+
+        <div class="float-badge fb-likes">
+          <span style="color: #e91e63; font-size: 18px">❤️</span> 30k
+        </div>
+
+        <div class="float-badge fb-followers">
+          <div class="avatar-group" style="margin-right: 8px">
+            <img
+              src="https://i.pravatar.cc/100?img=33"
+              style="
+                width: 24px;
+                height: 24px;
+                margin-left: -8px;
+                border: none;
+                box-shadow: none;
+              "
+            />
+            <img
+              src="https://i.pravatar.cc/100?img=34"
+              style="
+                width: 24px;
+                height: 24px;
+                margin-left: -8px;
+                border: none;
+                box-shadow: none;
+              "
+            />
+          </div>
+          2k+ followers
+        </div>
+      </div>
+    </header>
+
+    <!-- Carousel Section -->
+    <section class="carousel-section">
+      <div class="carousel-container">
+        <div class="carousel-track" id="track"></div>
+      </div>
+      <div class="dots" id="dots"></div>
+    </section>
+    <script>
+      const reviews = [
+        {
+          letter: "NI",
+          name: "Nifty",
+          title: "Best managed forex accounts out there",
+          text: "This company helped me so much and were able to provide me with a rather steady and unfluctuating rate of almost 5% returns per month and they are always available for any questions.",
+        },
+        {
+          letter: "TA",
+          name: "Taylor",
+          title:
+            "Highly recommend to join Edge Forex Account Management service.",
+          text: "I joined Edge Forex Account Management a few months ago, and they have consistently helped me generate profits. I truly appreciate their efforts! I highly recommend their services.",
+        },
+        {
+          letter: "GI",
+          name: "Gigi",
+          title: "Solid returns with a nice trading strategy.",
+          text: "Solid returns with a nice trading strategy. The profits have surpassed my expectations so far. I am grateful of finding such a good bunch of traders. The live sessions are awesome too!!",
+        },
+        {
+          letter: "JA",
+          name: "Jasper",
+          title: "I am really satisfied with their service.",
+          text: "I am really satisfied with their service. Their strategy of manging risks is top notch. The monthly returns are also consistent. I am glad I found edgeforex.",
+        },
+        {
+          letter: "GM",
+          name: "Gustov Mari",
+          title: "These guys know what they are doing!!",
+          text: "These guys know what they are doing. I was not expecting much returns during the covid madness but they pulled it off really well and kept the drawdown to the minimal. A rare gem in this space.",
+        },
+      ];
+
+      const track = document.getElementById("track");
+      const dotsContainer = document.getElementById("dots");
+
+      /* Build cards */
+      function createCard(r) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+        <div class="avatar">${r.letter}</div>
+        <div class="name">${r.name}</div>
+        <div class="title">${r.title}</div>
+        <div class="text">${r.text}</div>
+      `;
+        return card;
+      }
+
+      // Append cards twice for loop effect
+      reviews.forEach((r) => track.appendChild(createCard(r)));
+      reviews.forEach((r) => track.appendChild(createCard(r)));
+
+      /* Build dots */
+      reviews.forEach((_, i) => {
+        const d = document.createElement("div");
+        d.className = "dot";
+        if (i === 0) d.classList.add("active");
+        dotsContainer.appendChild(d);
+      });
+
+      let index = 0;
+
+      /* Responsive width calculation */
+      function getCardWidth() {
+        // Card width + margin (350 + 24 approx or calculated dynamically)
+        // In CSS: card is min 350px, margin 0 12px (total 24px horizontal margin) => 374px per item step
+        const card = document.querySelector(".card");
+        if (!card) return 390;
+
+        const style = window.getComputedStyle(card);
+        const width = card.offsetWidth;
+        const marginLeft = parseFloat(style.marginLeft);
+        const marginRight = parseFloat(style.marginRight);
+
+        return width + marginLeft + marginRight;
+      }
+
+      function updateDots() {
+        document.querySelectorAll(".dot").forEach((d, i) => {
+          d.classList.toggle("active", i === index % reviews.length);
+        });
+      }
+
+      function slide() {
+        index++;
+        const cardWidth = getCardWidth();
+
+        track.style.transition = "transform 0.7s ease-in-out";
+        track.style.transform = `translateX(-${index * cardWidth}px)`;
+
+        updateDots();
+
+        // If we've scrolled past the first set, seamlessly jump back
+        if (index >= reviews.length) {
+          setTimeout(() => {
+            track.style.transition = "none";
+            index = 0;
+            track.style.transform = `translateX(0)`;
+          }, 700); // Wait for transition to finish
+        }
+      }
+
+      setInterval(slide, 3000);
+    </script>
   </body>
 </html>
