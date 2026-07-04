@@ -1,9 +1,9 @@
 import React from "react";
 
-const Card = ({ products }) => {
+const Card = ({ CurrentProducts }) => {
   return (
-    <div className="flex flex-wrap justify-around gap-4 my-4 flex-wrap">
-      {products.map((product) => (
+    <div className="flex flex-wrap justify-around gap-4 my-4">
+      {CurrentProducts.map((product) => (
         <div
           key={product.id}
           className="border bg-white shadow-lg m-2 p-2 rounded-lg text-center w-[300px] h-[400px] "
