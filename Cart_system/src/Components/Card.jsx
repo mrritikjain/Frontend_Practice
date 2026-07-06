@@ -1,6 +1,10 @@
 import React from "react";
+import { useContext } from "react";
+import { cartContext } from "../Context/CartContext";
 
 const Card = ({ CurrentProducts }) => {
+  const { cart, addItem, removeItem, updateQty, clearCart } =
+    useContext(cartContext);
   return (
     <div className="flex flex-wrap justify-around gap-4 my-4">
       {CurrentProducts.map((product) => (
@@ -15,7 +19,10 @@ const Card = ({ CurrentProducts }) => {
           />
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-lg">${product.price}</p>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer mt-2 hover:bg-blue-600">
+          <button
+            onClick={() => addItem(product)}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg cursor-pointer mt-2 hover:bg-blue-600"
+          >
             Add to Cart
           </button>
         </div>
