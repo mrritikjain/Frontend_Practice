@@ -4,7 +4,7 @@ import "./App.css";
 
 const App = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  
+
   return (
     <div className={`app-container ${theme}`}>
       <div className="card">
@@ -20,6 +20,4 @@ const App = () => {
   );
 };
 
-
 export default App;
-
