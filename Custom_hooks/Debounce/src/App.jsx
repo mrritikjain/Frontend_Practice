@@ -2,7 +2,7 @@ import React from "react";
 import { UseDebounce } from "./useDebounce";
 
 const App = () => {
-  const { debounce, setDebounce } = UseDebounce("hello", 300);
+  const { debounce, setDebounce } = UseDebounce("hello", 2000);
   return (
     <div>
       <input
